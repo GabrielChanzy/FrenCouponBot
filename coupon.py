@@ -51,7 +51,7 @@ def on_chat_message(msg):
         print(content_type, chat_type, chat_id, 'nonsense')
         nonsense += 1
         print("Blehh -", slash,"\nnonsense:", nonsense)
-        if nonsense%3 == 0:
+        if nonsense%3 == 0 and nonsense != 0:
             if nonsense > 12:
                 print("nonsense reset")
                 nonsense = -2
