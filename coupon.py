@@ -13,7 +13,7 @@ nonsense = 0
 
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
-    print(content_type, chat_type, chat_id)
+    # print(content_type, chat_type, chat_id)
     slash = msg['text']
     # emoji = msg['text'].encode('unicode-escape').decode('ascii')
     # print(emoji)
@@ -22,6 +22,7 @@ def on_chat_message(msg):
     global nonsense
 
     if slash == "/redeem":
+        print(content_type, chat_type, chat_id, '/redeem')
         nonsense = 0
         keyboard = InlineKeyboardMarkup(inline_keyboard=[
                 [InlineKeyboardButton(text="# food\U0001f359 #", callback_data='1'), InlineKeyboardButton(text= "# htht\U0001f60a #", callback_data='2'), InlineKeyboardButton(text= "# hug\U0001f646\U0001f3fb\u200d\u2642\ufe0f #", callback_data='3')],
@@ -31,23 +32,28 @@ def on_chat_message(msg):
         bot.sendMessage(chat_id, 'Choose your coupon!', reply_markup=keyboard)
 
     elif wait_for_suggestion:
+        print(content_type, chat_type, chat_id, 'suggestion')
         nonsense = 0
         bot.sendMessage(chat_id, "Ok! Suggesting {0:s} as an activity:)".format(slash))
         bot.sendMessage(gid, "{0:s} suggests that you both {1:s} together!".format(get_handle(msg), slash))
         wait_for_suggestion = False
 
     elif slash == "/fly":
+        print(content_type, chat_type, chat_id, '/fly')
         bot.sendMessage(chat_id, fly(), parse_mode="MarkdownV2")
         bot.sendMessage(chat_id,"Erm use desktop to see")
     
     elif slash == "/start":
+        print(content_type, chat_type, chat_id, '/start')
         bot.sendMessage(chat_id, "Hi use the /redeem command to use your coupon sheet!")
 
     else:
+        print(content_type, chat_type, chat_id, 'nonsense')
         nonsense += 1
-        print("Blehh -", slash)
+        print("Blehh -", slash,"\nnonsense:", nonsense)
         if nonsense%3 == 0:
             if nonsense > 16:
+                print("nonsense reset")
                 nonsense = 0
             else: 
                 bot.sendMessage(chat_id, {
@@ -119,6 +125,6 @@ if __name__ == "__main__":
     MessageLoop(bot, {'chat': on_chat_message, 'callback_query': on_callback_query}).run_as_thread()
     print('Listening...')
 
-    while 1:
-        time.sleep(1)
+    # while 1:
+        # time.sleep(1)
 
