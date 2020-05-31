@@ -47,12 +47,15 @@ def on_chat_message(msg):
         nonsense += 1
         print("Blehh -", slash)
         if nonsense%3 == 0:
-            bot.sendMessage(chat_id, {
-                3: "Hi use the /redeem command to use your coupon sheet!",
-                6: "Use the /redeem command to use your coupon sheet! Thanks!",
-                9: "Ok stop spamming! Use the /redeem command to use your coupon sheet!\U0001f621",
-                12: "K wad ev. Only gonna respond to /redeem\U0001f624",
-            }[nonsense])
+            if nonsense > 16:
+                nonsense = 0
+            else: 
+                bot.sendMessage(chat_id, {
+                    3: "Hi use the /redeem command to use your coupon sheet!",
+                    6: "Use the /redeem command to use your coupon sheet! Thanks!",
+                    9: "Ok stop spamming! Use the /redeem command to use your coupon sheet!\U0001f621",
+                    12: "K wad ev. Only gonna respond to /redeem\U0001f624",
+                }[nonsense])
 
 
 def on_callback_query(msg):
