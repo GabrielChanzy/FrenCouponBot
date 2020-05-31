@@ -125,6 +125,6 @@ if __name__ == "__main__":
     MessageLoop(bot, {'chat': on_chat_message, 'callback_query': on_callback_query}).run_as_thread()
     print('Listening...')
 
-    # while 1:
-        # time.sleep(1)
+    while 1:
+        time.sleep(1)
 
