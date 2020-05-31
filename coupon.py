@@ -52,9 +52,9 @@ def on_chat_message(msg):
         nonsense += 1
         print("Blehh -", slash,"\nnonsense:", nonsense)
         if nonsense%3 == 0:
-            if nonsense > 16:
+            if nonsense > 12:
                 print("nonsense reset")
-                nonsense = 0
+                nonsense = -2
             else: 
                 bot.sendMessage(chat_id, {
                     3: "Hi use the /redeem command to use your coupon sheet!",
